@@ -3,49 +3,62 @@ package com.bl;
 public class EmployeeWageMultiCom
 {
 	
+
+		//declaring constants
+		public static final int IS_PART_TIME=1;
+		public static final int IS_FULL_TIME=2;
+		/*
+		 * public static final int EMP_RATE_PER_HOUR=20; public static final int
+		 * NUM_OF_WORKING_DAYS=20; public static final int MAX_HRS_IN_MONTH=10;
+		 */
+
+		private final String company;
+		private final int empRatePerour;
+		private final int numOfWorkingDays;
+		private final int maxHoursPerMonth;
+
+		//created parametrized constructor
+		public EmployeeWageMultiCom(String company, int empRatePerour, int numOfWorkingDays, int maxHoursPerMonth) {
+			super();
+			this.company = company;
+			this.empRatePerour = empRatePerour;
+			this.numOfWorkingDays = numOfWorkingDays;
+			this.maxHoursPerMonth = maxHoursPerMonth;
+		}
+
+
 		public static void main(String[] args) {
+			EmployeeWageMultiCom Reliance=new EmployeeWageMultiCom("Reliance",20,3,20);
 
-			//constants
-			final int isPart_time=0;
-			final int isFull_time=1;
+			//declaring variables
+			int empHours=0,totalEmpHours=0,totalWorkingDays=0;
+			while(totalEmpHours <= Reliance.maxHoursPerMonth && totalWorkingDays <= Reliance.numOfWorkingDays ) {
 
-			//variables
-			int rateperHour=20;
-			
-			int salary=0;
-			int num_working_days=25;
-			int monthlySalary=0;
-			int total_emp_hours=0;
-			int total_working_days=0;
-			int max_hours_inmonth=100;
+				totalWorkingDays++;
+				int empCheck=(int)Math.floor(Math.random()*10) % 2;
 
-			while(total_emp_hours <= max_hours_inmonth && total_working_days <= num_working_days ) {
-				int empHours=0;
-				total_working_days++;
-				double empCheck=Math.floor(Math.random()*10) % 2;
-				int empcheck=(int)empCheck;
 
-				switch(empcheck){    
-				case isFull_time:    
+				switch(empCheck){    
+				case  IS_FULL_TIME:    
 					empHours=8;
 					break;  //optional  
-				case isPart_time:    
+				case IS_PART_TIME:    
 					empHours=4;
 					break; 
 				default:     
 					empHours=0;  
 					break;
-				} 
-				total_emp_hours+=empHours;
-				salary=rateperHour*empHours;
-				monthlySalary=monthlySalary+salary;
+				}
+				totalEmpHours+=empHours;
+				System.out.println("Day#:" +totalWorkingDays+"Emp Hr :"+empHours);
 			}
-			System.out.println("Employee Salary is "+salary);
-			System.out.println("Employee Monthly Salary is "+monthlySalary);
-			System.out.println("Employee total Salary is "+total_emp_hours);
-		}
+			int totalEmpWage=Reliance.empRatePerour*totalEmpHours;
+			System.out.println("Total Employee Wage for Company " +Reliance.company+  "  is  " +totalEmpWage);
 
+		}
 	}
+
+	
 
 
 			
