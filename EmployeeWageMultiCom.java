@@ -3,62 +3,70 @@ package com.bl;
 public class EmployeeWageMultiCom
 {
 	
-
-		//declaring constants
-		public static final int IS_PART_TIME=1;
-		public static final int IS_FULL_TIME=2;
-		/*
-		 * public static final int EMP_RATE_PER_HOUR=20; public static final int
-		 * NUM_OF_WORKING_DAYS=20; public static final int MAX_HRS_IN_MONTH=10;
-		 */
-
-		private final String company;
-		private final int empRatePerour;
-		private final int numOfWorkingDays;
-		private final int maxHoursPerMonth;
-
-		//created parametrized constructor
-		public EmployeeWageMultiCom(String company, int empRatePerour, int numOfWorkingDays, int maxHoursPerMonth) {
-			super();
-			this.company = company;
-			this.empRatePerour = empRatePerour;
-			this.numOfWorkingDays = numOfWorkingDays;
-			this.maxHoursPerMonth = maxHoursPerMonth;
+		public static final int fullTime = 1;
+		public static final int partTime = 2;
+		
+		private  String company;
+		private  int hrWages;
+		private  int workingDays;
+		private  int workingHours;
+		static double EmpWages;
+		
+		public EmployeeWageMultiCom(String string, int i, int j, int k) {
+			// TODO Auto-generated constructor stub
 		}
 
 
-		public static void main(String[] args) {
-			EmployeeWageMultiCom Reliance=new EmployeeWageMultiCom("Reliance",20,3,20);
-
-			//declaring variables
-			int empHours=0,totalEmpHours=0,totalWorkingDays=0;
-			while(totalEmpHours <= Reliance.maxHoursPerMonth && totalWorkingDays <= Reliance.numOfWorkingDays ) {
-
-				totalWorkingDays++;
-				int empCheck=(int)Math.floor(Math.random()*10) % 2;
-
-
-				switch(empCheck){    
-				case  IS_FULL_TIME:    
-					empHours=8;
-					break;  //optional  
-				case IS_PART_TIME:    
-					empHours=4;
-					break; 
-				default:     
-					empHours=0;  
-					break;
-				}
-				totalEmpHours+=empHours;
-				System.out.println("Day#:" +totalWorkingDays+"Emp Hr :"+empHours);
-			}
-			int totalEmpWage=Reliance.empRatePerour*totalEmpHours;
-			System.out.println("Total Employee Wage for Company " +Reliance.company+  "  is  " +totalEmpWage);
-
+		public void EmpWageBuilder(String company, int hrWages, int workingDays, int workingHours) {
+			this.company=company;
+			this.hrWages=hrWages;
+			this.workingDays=workingDays;
+			this.workingHours=workingHours;
 		}
-	}
 
-	
-
-
+		
+		private double CompanyEmpWage(){
+			int TotalWorkingHours=0;
+			int TotalWorkingDays=0;
 			
+			double TotalWages = 0;
+			while(TotalWorkingHours<=workingHours && TotalWorkingDays <=workingDays ) {
+				TotalWorkingDays++;
+				int empID= (int) Math.floor(Math.random()*10)%3;
+				switch (empID) {
+					case fullTime :{
+						TotalWorkingHours=8;
+						break;
+				}
+					case partTime :{
+						TotalWorkingHours=4;
+						break;
+				}
+					default : {
+						TotalWorkingHours=0;
+						
+					}
+				}
+				EmpWages = TotalWorkingHours*hrWages*workingDays;
+				TotalWages += EmpWages;
+			}
+			return TotalWages;
+			
+		}
+
+
+		public static void main(String[] args)
+		{
+			
+			System.out.println("Welcome to Employee Wage Computation\r\n") ;
+			String Reliance="";
+			EmployeeWageMultiCom Reliance1 = new EmployeeWageMultiCom("Reliance",20,20,100);
+			EmployeeWageMultiCom WalMart = new EmployeeWageMultiCom("WalMart",10,20,100);
+			EmployeeWageMultiCom Spencers = new EmployeeWageMultiCom("Spencers",15,20,100);
+			
+			{	
+				System.out.println("Total Monthly wages of "+Reliance1.company+" is : Rs "+Reliance1.CompanyEmpWage());
+			    System.out.println("Total Monthly wages of "+WalMart.company+" is : Rs "+WalMart.CompanyEmpWage());
+			    System.out.println("Total Monthly wages of "+Spencers.company+" is : Rs "+Spencers.CompanyEmpWage());
+			}}}
+				
